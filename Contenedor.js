@@ -9,7 +9,7 @@ class Contenedor {
         try {
             const objs = await fs.readFile(this.ruta, 'utf8');
             
-            return JSON.parse(objs); ;
+            return JSON.parse(objs); 
         
         } catch (error) {
             return [];
@@ -85,14 +85,17 @@ class Contenedor {
     }
 }
 
+
 async function main() { 
-    const contenedor = new Contenedor('./DB/productos.json');
-    console.log(contenedor.ruta)
-    console.log(await contenedor.getAll());
-    console.log(await contenedor.getById(2));
-    // console.log(await contenedor.save({ title: 'Bajo', price: 100, thumbnail: 'https://via.placeholder.com/150' }));
-    // console.log(await contenedor.deleteById(6));
-    // console.log(await contenedor.deleteAll());
+    //     const contenedor = new Contenedor('./DB/productos.json');
+    //     // console.log(contenedor.ruta)
+    //     // console.log(await contenedor.getAll());
+    // console.log(await contenedor.getById(2));
+//     // console.log(await contenedor.save({ title: 'Bajo', price: 100, thumbnail: 'https://via.placeholder.com/150' }));
+//     // console.log(await contenedor.deleteById(6));
+//     // console.log(await contenedor.deleteAll());
     
 }
 main();
+
+module.exports = Contenedor;
