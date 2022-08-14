@@ -16,6 +16,7 @@ class Contenedor {
         }
     } 
     
+    
     async getById(id) {
         
         try {
@@ -26,6 +27,20 @@ class Contenedor {
             } else { 
                 return objId;
             }
+           
+        } catch (error) {
+            return 'Error';
+        }
+
+        
+    }
+    async getRandom() {
+        
+        try {
+            const objs = await this.getAll();
+            const objRandom = objs.length == 0 ? null : objs[Math.floor(Math.random() * objs.length)];
+            
+            return objRandom;
            
         } catch (error) {
             return 'Error';
@@ -87,8 +102,9 @@ class Contenedor {
 
 
 async function main() { 
-    //     const contenedor = new Contenedor('./DB/productos.json');
-    //     // console.log(contenedor.ruta)
+    
+    // const contenedor = new Contenedor('./DB/productos.json');
+    
     //     // console.log(await contenedor.getAll());
     // console.log(await contenedor.getById(2));
 //     // console.log(await contenedor.save({ title: 'Bajo', price: 100, thumbnail: 'https://via.placeholder.com/150' }));

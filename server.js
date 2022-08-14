@@ -5,7 +5,7 @@ const Contenedor = require('./Contenedor.js')
 const app = express();
 const contenedor = new Contenedor('./DB/productos.json');
 
-const rndmNum = Math.floor(Math.random() * 3) + 1
+
 
 app.get('/productos', async (req, res) => {
    
@@ -14,7 +14,7 @@ app.get('/productos', async (req, res) => {
 })
 
 app.get('/productoRandom', async (req, res) => {
-    res.send(await contenedor.getById(rndmNum))
+    res.send(await contenedor.getRandom());
     
 })
 
