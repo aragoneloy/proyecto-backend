@@ -1,25 +1,33 @@
+
+// ---------------------------- Módulos ----------------------------
 const express = require('express');
-const Contenedor = require('./Contenedor.js')
+const { Router } = express;
+const morgan = require('morgan')
 
 
+// ---------------------------- instancias del servidor ----------------------------
 const app = express();
-const contenedor = new Contenedor('./DB/productos.json');
+const routerProductos = require('./src/routes/productos.routes.js')
+
+// ---------------------------- Middlewares ----------------------------
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.use(morgan('tiny'));
+app.use(express.static(__dirname + '/public'));
 
 
 
-app.get('/productos', async (req, res) => {
-   
-    res.send(await contenedor.getAll()) 
-    
-})
 
-app.get('/productoRandom', async (req, res) => {
-    res.send(await contenedor.getRandom());
-    
-})
+
+// ---------------------------- Rutas ----------------------------
+app.use('/api/productos', routerProductos);
 
 
 
+
+
+
+// ---------------------------- Servidor ----------------------------
 const PORT = 8080;
 app.get('/', (req, res) => {
     res.send('Hello World!');

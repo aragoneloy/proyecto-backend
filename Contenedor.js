@@ -23,7 +23,7 @@ class Contenedor {
             const objs = await this.getAll();
             const objId = objs.find(obj => obj.id == id);
             if (objId == undefined) {
-                return null;
+                return {error: 'producto no encontrado'};
             } else { 
                 return objId;
             }
@@ -63,7 +63,7 @@ class Contenedor {
         
             
             await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2));
-            return newId;
+            return newObj;
         }
         catch (error) {
             console.log(error);
@@ -86,6 +86,25 @@ class Contenedor {
         }        
         
     }
+    async updateById(id, title, price, thumbnail) {
+        try {
+            const objs = await this.getAll();
+            const indexObj = objs.findIndex(obj => obj.id == id);
+            if(indexObj == -1) {
+                return 'elemento no encontrado';
+            } else {
+                objs[indexObj].title = title;
+                objs[indexObj].price = price;
+                objs[indexObj].thumbnail = thumbnail;
+
+                await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2));
+                return 'elemento actualizado';
+            }
+        } catch (error){
+            return 'No se pudo actualizar';
+        }        
+        
+    }
     async deleteAll() {
         try {
             const objs = await this.getAll();
@@ -100,18 +119,5 @@ class Contenedor {
     }
 }
 
-
-async function main() { 
-    
-    // const contenedor = new Contenedor('./DB/productos.json');
-    
-    //     // console.log(await contenedor.getAll());
-    // console.log(await contenedor.getById(2));
-//     // console.log(await contenedor.save({ title: 'Bajo', price: 100, thumbnail: 'https://via.placeholder.com/150' }));
-//     // console.log(await contenedor.deleteById(6));
-//     // console.log(await contenedor.deleteAll());
-    
-}
-main();
 
 module.exports = Contenedor;
