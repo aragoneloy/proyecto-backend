@@ -2,12 +2,13 @@
 // ---------------------------- Módulos ----------------------------
 const express = require('express');
 const { Router } = express;
-const morgan = require('morgan')
+const morgan = require('morgan');
 
 
 // ---------------------------- instancias del servidor ----------------------------
 const app = express();
 const routerProductos = require('./src/routes/productos.routes.js')
+const routerCarrito = require('./src/routes/carrito.routes.js');
 
 // ---------------------------- Middlewares ----------------------------
 app.use(express.json());
@@ -16,24 +17,18 @@ app.use(morgan('tiny'));
 app.use(express.static(__dirname + '/public'));
 
 
-
-
-
 // ---------------------------- Rutas ----------------------------
 app.use('/api/productos', routerProductos);
-
-
-
-
+app.use('/api/carrito', routerCarrito);
 
 
 // ---------------------------- Servidor ----------------------------
-const PORT = 8080;
+let PORT = process.env.PORT || 8080;
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
 
 const server = app.listen(PORT, () =>  {
-    console.log('servidor corriendo en el puerto 8080');
+    console.log(`servidor corriendo en el puerto ${PORT}`);
 } );

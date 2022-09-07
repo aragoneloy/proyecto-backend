@@ -1,5 +1,5 @@
 const fs = require('fs/promises');
-
+let moment = require('moment'); 
 class Contenedor {
     constructor(ruta) {
         this.ruta = ruta;
@@ -58,7 +58,7 @@ class Contenedor {
                 newId = objs[objs.length - 1].id + 1;
             }
 
-            const newObj = { ...obj, id: newId };
+            const newObj = { ...obj, id: newId, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') };
             objs.push(newObj);
         
             
