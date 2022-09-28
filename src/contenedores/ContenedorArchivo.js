@@ -1,6 +1,7 @@
-const fs = require('fs/promises');
-let moment = require('moment'); 
-class Contenedor {
+import fs from 'fs/promises';
+import moment from 'moment'; 
+
+export default class ContenedorArchivo {
     constructor(ruta) {
         this.ruta = ruta;
     }
@@ -86,20 +87,19 @@ class Contenedor {
         }        
         
     }
-    async updateById(id, title, price, thumbnail) {
+    async updateById(id, newObj) {
         try {
             const objs = await this.getAll();
             const indexObj = objs.findIndex(obj => obj.id == id);
             if(indexObj == -1) {
                 return 'elemento no encontrado';
             } else {
-                objs[indexObj].title = title;
-                objs[indexObj].price = price;
-                objs[indexObj].thumbnail = thumbnail;
+                objs[indexObj] = {id, ...newObj}
 
                 await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2));
-                return 'elemento actualizado';
+               
             }
+            return {id, ...newObj};
         } catch (error){
             return 'No se pudo actualizar';
         }        
@@ -120,4 +120,3 @@ class Contenedor {
 }
 
 
-module.exports = Contenedor;

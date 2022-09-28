@@ -1,10 +1,11 @@
-const express = require('express')
-const routerProductos = express.Router();
-const Contenedor = require('../../Contenedor.js')
+import express from 'express'
 
-//DB
-const contenedor = new Contenedor('./DB/productos.json')
+import { carritosDao as carrito, productosDao as contenedor} from '../daos/index.js'
+
+const routerProductos = express.Router();
+
 const isAdmin = true
+
 routerProductos.get('/', async (req, res) => {
     res.status(200).json(await contenedor.getAll())
 });
@@ -43,4 +44,5 @@ routerProductos.delete('/:id', async (req, res) => {
     }
 })
 
-module.exports = routerProductos;
+
+export default routerProductos;
