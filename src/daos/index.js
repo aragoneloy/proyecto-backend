@@ -1,6 +1,8 @@
 
 let productosDao
 let carritosDao
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 switch (process.env.PERS) {
     case 'json':
