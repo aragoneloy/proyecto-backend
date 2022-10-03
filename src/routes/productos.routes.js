@@ -20,7 +20,7 @@ routerProductos.post('/', async (req, res) => {
         res.status(401).json({error:'error 401', descripcion:`ruta /productos, metodo post, no autorizada`})
     } else{
         console.log(await req.body)
-        contenedor.save(await req.body)
+       await contenedor.save(req.body)
         res.status(201).json({msg: 'Agregado!', data: req.body})
     }
     
