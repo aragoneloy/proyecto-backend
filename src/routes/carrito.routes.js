@@ -13,14 +13,20 @@ routerCarrito.delete('/:id', async (req, res) => {
 });
 
 routerCarrito.get('/:id/productos', async (req, res) => {
-    const cart = await carrito.getById(req.params.id)
+    const id = req.params.id
+    
+    const cart = await carrito.getById(id)
     res.status(200).json(cart.productos)
 });
 
 routerCarrito.post('/:id/productos', async (req, res) => {
     const cart = await carrito.getById(req.params.id) ;
-    const producto = await contenedor.getById(req.body.id)
-    cart.productos.push(producto)
+    console.log(cart)
+    const producto = await contenedor.getById(req.body._id)
+    console.log(producto)
+    
+    cart[0].productos.push(producto[0])
+    
     await carrito.updateById(req.params.id, cart)
     res.end()
 });

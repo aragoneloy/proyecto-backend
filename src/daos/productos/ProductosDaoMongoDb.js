@@ -1,4 +1,4 @@
-import ContenedorMongoDb from "../../contenedores/ContenedorMongoDb";
+import ContenedorMongoDb from "../../contenedores/ContenedorMongoDb.js";
 
 
 
@@ -7,8 +7,7 @@ export default class ProductosDaoMongoDb extends ContenedorMongoDb{
         super('productos', {
             title: {type: String, require: true},
             price: {type: Number, require: true},
-            thumbnail: {type: String, require: true},
-            timestamps: true
+            thumbnail: {type: String, require: true}
         })
 
     }

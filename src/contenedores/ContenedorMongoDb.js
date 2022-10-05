@@ -22,8 +22,9 @@ export default class ContenedorMongoDb {
 
     async getById(id){
         try {
-            const docs = await this.collection.findById(id)
-            if(docs.length == 0){
+            
+            const docs = await this.collection.find({_id: id})
+            if(docs.length == null){
                 throw new Error('No se encontro el elemento con la id proporcionada.')
             } else {
                 return docs
@@ -45,7 +46,8 @@ export default class ContenedorMongoDb {
 
     async updateById(id, obj){
         try {
-           await this.collection.findByIdAndUpdate(id, obj)
+            console.log('objeto pasado', obj)
+           await this.collection.replaceOne({'_id': id}, obj)
         } catch (error) {
             throw error
         }
@@ -53,7 +55,7 @@ export default class ContenedorMongoDb {
 
     async deleteById(id){
         try {
-            await this.model.findByIdAndDelete(id)
+            await this.collection.findByIdAndDelete(id)
         } catch (error) {
             throw error;
         }

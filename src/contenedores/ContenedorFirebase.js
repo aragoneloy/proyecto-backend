@@ -28,12 +28,15 @@ export default class ContenedorFirebase {
 
     async getById(id){
         try {
-            const doc = await this.coleccion.doc(id).get()
+            const docRef = this.coleccion.doc(`${id}`);
+            const doc = await docRef.get()
+            console.log(doc)
             if (!doc.exists){
-                throw error
+               throw new Error('error al listar por id')
             } else {
                 const data = doc.data()
                 return { ...data, id}
+                
             }
         } catch (error) {
             throw error; 

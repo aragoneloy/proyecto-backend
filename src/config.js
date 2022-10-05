@@ -3,7 +3,7 @@ export default {
         
     },
     atlas: {
-        strConn: `mongodb+srv://eloyaragon:d4CVjuFXaGRIbqjy@cluster0.gstcy4m.mongodb.net/?retryWrites=true&w=majority`
+        strConn: `mongodb+srv://eloyaragon:d4CVjuFXaGRIbqjy@cluster0.gstcy4m.mongodb.net/ecommerce?retryWrites=true&w=majority`
     },
   
     firebase: {
